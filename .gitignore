@@ -1,0 +1,12 @@
+# Local retrieval cache: third-party full text and generated summaries are not redistributed.
+research/search-*.json
+research/briefs/
+research/*-head.txt
+research/*-method.txt
+research/*-preview.txt
+research/*-brief.txt
+deck/rendered/
+deck/browser-profile/
+node_modules/
+__pycache__/
+*.tmp
