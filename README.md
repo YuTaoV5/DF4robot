@@ -2,7 +2,7 @@
 
 **机器人多传感器融合：IMU × Camera × LiDAR × 毫米波 Radar，从 Kalman 到 VLA。**
 
-54 页中文离线交互 slides，53 项论文与经典资料索引，覆盖概率模型、多频异步、算法流程、系统选型、学习方法与机器人应用。检索截止 **2026-10-13**。
+70 页中文离线交互 slides，保留原53项论文与经典资料索引，新增四足 D435i / Mid-360 高台感知 RL、教师地图与高飞团队无地图导航的数据流。原综述检索截止 **2026-10-13**；任务章节更新 **2026-10-19**。
 
 ![全部页面预览](deck/预览-全部页面.png)
 
@@ -10,8 +10,9 @@
 
 下载或 clone 本仓库，双击 [deck/deck.html](deck/deck.html)，使用 Chrome / Edge 打开即可；不需要网络、服务器、Node.js 或 Python。GitHub 文件预览显示 HTML 源码，演示请下载后打开。
 
-- **10 分钟决策路径**：2 → 4 → 31 → 36 → 40 → 46 → 49 → 51 → 52。
-- **45–60 分钟讲解路径**：完整 54 页，按听众背景选择公式深度。
+- **10 分钟决策路径**：2 → 4 → 31 → 45 → 50 → 54 → 58 → 59 → 68。
+- **本次任务讲解路径**：45–60，按 N 查看训练接口、证据与来源。
+- **完整讲解路径**：70 页，按听众背景选择公式深度。
 - **深入阅读**：[综述](research/综述.md) · [53 项论文索引](research/论文索引.md) · [逐页讲稿](deck/讲稿.md) · [检索记录](research/检索记录.md)。
 - **审阅结果**：[两种角色视角的意见与修改](审阅与修改.md)。
 
@@ -37,8 +38,12 @@
 | 20–27 | Bayes、ESKF、InEKF、UKF/粒子、MSCKF、因子图、可观性 |
 | 28–36 | VIO/LIO/LIVO/RIO、Doppler、2026 方向自适应融合 |
 | 37–44 | 学习式估计、协方差、VLA、动作块、触觉与异步策略 |
-| 45–52 | 场景选型、失效降级、数据集、指标、消融、阶段门槛 |
-| 53–54 | 核心与前沿阅读入口 |
+| 45–53 | 四足高台：传感器、局部地形、观测、教师学生、PPO、MoE与归档结果 |
+| 54–60 | 地图教师、地图奖励、高飞团队点云/深度无地图导航与四足分层控制 |
+| 61–68 | 场景选型、失效降级、数据集、指标、消融、阶段门槛 |
+| 69–70 | 核心与前沿阅读入口 |
+
+本章源码与数据核查见[任务数据流核查](research/任务数据流核查.md)。高台分数来自本地 Rob2Nav 仿真归档，未声称完成实机或双传感器独立收益验证。
 
 ## 证据与限制
 
@@ -64,7 +69,7 @@ python build_deck.py
 ```powershell
 # 方式一：kelip 模板的 Chrome 渲染脚本；需要 Pillow
 $env:CHROME='C:/Program Files/Google/Chrome/Application/chrome.exe'
-python deck/render_preview.py deck/deck.html 54 deck/rendered 1
+python deck/render_preview.py deck/deck.html 70 deck/rendered 1
 
 # 方式二：Playwright 逐页截图 + 边界/交互检查；需要 Node.js 与 Playwright
 node deck/verify_render.cjs
@@ -80,7 +85,7 @@ python deck/make_contact.py
 ```text
 deck/deck.html             离线 slides（CSS / JS / SVG 全内联）
 deck/讲稿.md               逐页说明、假设与引用
-deck/预览-全部页面.png     全 54 页视觉检查总览
+deck/预览-全部页面.png     全 70 页视觉检查总览
 deck/validation.json       浏览器检查结果
 research/综述.md           完整知识整理与推导
 research/论文索引.md       53 项条目、贡献、限制与链接
@@ -88,4 +93,5 @@ research/papers.json       结构化书目
 research/检索记录.md       查询、命令、读取层级和排除记录
 审阅与修改.md              模拟审阅与实际落实
 build_deck.py              内容与图形生成源
+task_slides.py             高台与导航章节生成源
 ```

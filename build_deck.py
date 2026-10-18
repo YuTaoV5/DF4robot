@@ -41,7 +41,7 @@ def divider(num,title,sub):
 # 01–04 · executive overview
 add('导览','机器人如何融合<span class="acc">不同的世界</span>',
  svg(box(30,45,310,125,'IMU','运动连续性')+box(30,205,310,125,'Camera','纹理与语义')+box(30,365,310,125,'LiDAR / Radar','几何 / 多普勒')+line(365,105,650,260)+line(365,270,650,270)+line(365,425,650,280)+box(670,160,400,220,'状态与不确定性','时间 · 几何 · 概率',True)+line(1090,270,1220,270,True)+box(1240,175,330,190,'机器人行动','定位 → 规划 → 操作')),
- 'IMU × 视觉 × LiDAR × 毫米波 Radar ｜ 传统估计到 VLA ｜ 2026-10-13',
+ 'IMU × 视觉 × LiDAR × Radar ｜ 高台感知 RL 与无地图导航 ｜ 2026-10-19',
  note='这份讲解用同一套状态估计问题串联传统和前沿方向。雷达明确分为激光 LiDAR 与射频 Radar。53 项阅读条目形成方法地图，核心机制展开推导；不是统一硬件上的性能复测。')
 add('导览','建议立项：先验收定位，再按失效场景扩模态',
  cards([('基本盘','轻量平台 → VIO<br>普通巡检 → LIO'),('补短板','几何 / 纹理互补 → LIVO<br>低能见度 → 评估 Radar'),('任务层','语义操作 → VLA<br>精细接触 → 触觉 / 力')]),
@@ -232,6 +232,9 @@ add('学习与 VLA','异步策略的输入，也应携带时间与有效性',
  note='不同频率可通过短历史窗口、时间编码、有效性 mask、年龄 age、按任务触发的查询处理。训练时应覆盖丢帧和时差，部署时设置最大观测年龄和动作缓存长度。此为设计建议，不声称现有 OpenVLA 原生实现全部接口。')
 
 # 45–52 · deployment
+from task_slides import register
+register(globals())
+
 divider('06','落地选择','按环境与验收选型，而不是按模型热度')
 add('落地选择','先识别失效环境，再决定增加什么传感器',
  table(['机器人任务','建议起点','升级触发条件'],[
@@ -325,7 +328,7 @@ document.querySelectorAll('[data-event]').forEach(b=>b.onclick=()=>timeline(+b.d
 '''
 
 def build():
- assert len(slides)==54, len(slides)
+ assert len(slides)==70, len(slides)
  template=(D/'template.html').read_text(encoding='utf-8')
  start=template.index('<!-- ===== 1 '); end=template.index('\n</div>\n<div id="nav-hot">',start)
  result=template[:start]+'\n'.join(s['html'] for s in slides)+template[end:]
