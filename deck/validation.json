@@ -1,47 +1,202 @@
 {
-  "slides": 70,
+  "slides": 18,
+  "stagesChecked": 72,
   "errors": [],
   "layout": [],
-  "gaussian": {
-    "initial": {
-      "mean": 1.1047619047619048,
-      "variance": 0.19047619047619047,
-      "sigma": 0.4364357804719847
+  "animation": [
+    {
+      "page": 1,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
     },
-    "changed": {
-      "mean": 1.1261146496815286,
-      "variance": 0.22929936305732487,
-      "sigma": 0.4788521306805733
+    {
+      "page": 2,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        false,
+        false
+      ]
     },
-    "narrow": {
-      "result": {
-        "mean": 1.0188034188034187,
-        "variance": 0.03418803418803419,
-        "sigma": 0.18490006540840973
-      },
-      "paths": [
-        {
-          "y": 390.4159851074219,
-          "bottom": 415.9962463378906
-        },
-        {
-          "y": 124.15989685058594,
-          "bottom": 419.99998474121094
-        },
-        {
-          "y": 301.6639709472656,
-          "bottom": 420
-        },
-        {
-          "y": 100.00669860839844,
-          "bottom": 419.99998474121094
-        }
+    {
+      "page": 3,
+      "withinStageMotion": true,
+      "movingStages": [
+        false,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 4,
+      "withinStageMotion": true,
+      "movingStages": [
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 5,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 6,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 7,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 8,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 9,
+      "withinStageMotion": true,
+      "movingStages": [
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 10,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 11,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 12,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 13,
+      "withinStageMotion": true,
+      "movingStages": [
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 14,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 15,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 16,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 17,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 18,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
       ]
     }
+  ],
+  "kalman": {
+    "initial": {
+      "gain": 0.8,
+      "mean": 1.6,
+      "variance": 0.7999999999999998
+    },
+    "noisy": {
+      "gain": 0.3076923076923077,
+      "mean": 0.6153846153846154,
+      "variance": 2.769230769230769
+    },
+    "narrow": true
   },
-  "animation": {
-    "first": 1,
-    "last": 5
-  },
-  "generated": "2026-10-18T16:35:37.641Z"
+  "generated": "2026-10-18T23:07:13.745Z"
 }

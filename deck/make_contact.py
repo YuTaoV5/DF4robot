@@ -1,7 +1,9 @@
 from pathlib import Path
 from PIL import Image, ImageDraw
 base=Path(__file__).resolve().parent
-files=sorted((base/'rendered').glob('slide-*.png'))
+import json
+count=len(json.loads((base/'slides.json').read_text(encoding='utf-8')))
+files=[base/'rendered'/f'slide-{i:02}.png' for i in range(1,count+1)]
 if not files: raise SystemExit('Render slides first')
 tw,th,cols,gap=480,270,4,12
 sheet=Image.new('RGB',(cols*tw+(cols+1)*gap,((len(files)+cols-1)//cols)*(th+32+gap)+gap),'#D2D2D7')

@@ -1,58 +1,67 @@
-// Render and inspect the offline deck with a real Chromium engine.
-// Set NODE_PATH to your installed Playwright package directory if needed.
+// Deterministic verification of every animation stage and interactive formula.
 const {chromium}=require('playwright');
-const fs=require('fs'); const path=require('path'); const {pathToFileURL}=require('url');
+const fs=require('fs'),path=require('path'),{pathToFileURL}=require('url');
 (async()=>{
- const out=path.resolve(__dirname,'rendered');fs.mkdirSync(out,{recursive:true});
+ const out=path.join(__dirname,'rendered');fs.mkdirSync(out,{recursive:true});
  const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME||'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  const page=await browser.newPage({viewport:{width:1920,height:1080},deviceScaleFactor:1});
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto(pathToFileURL(path.resolve(__dirname,'deck.html')).href);
+ const errors=[],layout=[],animation=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(pathToFileURL(path.join(__dirname,'deck.html')).href);
  await page.evaluate(()=>document.fonts.ready);
- const count=await page.locator('.slide').count();const layout=[];
- for(let i=1;i<=count;i++){
-  if(i>1)await page.keyboard.press('ArrowRight');
-  await page.waitForTimeout(70);
-  const checks=await page.evaluate(()=>{
-   const s=document.querySelector('.slide.active');const sr=s.getBoundingClientRect();const problems=[];
-   for(const el of s.querySelectorAll('h1,.sub,.kicker,td,th,.card,.mathcard,.event-controls,.reading a,svg text')){
-    const r=el.getBoundingClientRect();
-    if(r.right>sr.right-30||r.bottom>sr.bottom-30||r.left<sr.left-1)problems.push({text:el.textContent.slice(0,90),reason:'stage bounds',rect:[r.x,r.y,r.width,r.height]});
-    if(el.tagName.toLowerCase()==='text'){
-     const v=el.closest('svg').getBoundingClientRect();
-     if(r.left<v.left-2||r.right>v.right+2||r.top<v.top-2||r.bottom>v.bottom+2)problems.push({text:el.textContent,reason:'svg bounds'});
-    }
-    if(el.scrollWidth>el.clientWidth+3 && ['TD','TH','H1'].includes(el.tagName))problems.push({text:el.textContent,reason:'overflow'});
-   }
-   return {page:Number(location.hash.slice(1)),title:s.dataset.title,problems};
-  });layout.push(checks);
-  await page.screenshot({path:path.join(out,`slide-${String(i).padStart(2,'0')}.png`)});
+ const count=await page.locator('.slide').count();
+ for(let n=1;n<=count;n++){
+  await page.evaluate(n=>window.deck.go(n),n);
+  for(let k=0;k<4;k++){
+   await page.evaluate(k=>window.deck.setStep(k),k);
+   const problems=await page.evaluate(()=>{
+    const sl=document.querySelector('.slide.active'),problems=[];
+    for(const el of sl.querySelectorAll('h1,.sub,.kicker,.caption,.mathhint,.step,svg text')){
+     const r=el.getBoundingClientRect();
+     if(r.left<120||r.right>1800||r.bottom>1005||r.top<35)problems.push({text:el.textContent,reason:'stage bounds',rect:[r.x,r.y,r.width,r.height]});
+     if(el.tagName.toLowerCase()==='text'){
+      const v=el.closest('svg').getBoundingClientRect();if(r.left<v.left-2||r.right>v.right+2||r.top<v.top-2||r.bottom>v.bottom+2)problems.push({text:el.textContent,reason:'svg bounds'});
+     }else if(el.scrollWidth>el.clientWidth+3)problems.push({text:el.textContent,reason:'overflow'});
+    }return problems;
+   });if(problems.length)layout.push({page:n,step:k,problems});
+   await page.screenshot({path:path.join(out,`phase-${String(n).padStart(2,'0')}-${k}.png`)});
+  }
+  await page.screenshot({path:path.join(out,`slide-${String(n).padStart(2,'0')}.png`)});
+  let moves=[];
+  for(let k=0;k<4;k++){
+   await page.evaluate(k=>{window.deck.setStep(k);window.deck.advance(-3.8);},k);
+   const a=await page.locator('.slide.active svg').innerHTML();await page.evaluate(()=>window.deck.advance(1.9));
+   const b=await page.locator('.slide.active svg').innerHTML();moves.push(a!==b);
+  }
+  animation.push({page:n,withinStageMotion:moves.some(Boolean),movingStages:moves});
+  if(!moves.some(Boolean))errors.push(`Page ${n} has no moving geometry`);
  }
- // Interaction checks: navigation, Gaussian calculation, timeline, animation, notes.
- await page.keyboard.press('Home');await page.keyboard.press('1');await page.keyboard.press('0');await page.waitForTimeout(650);
- const initial=await page.evaluate(()=>window.gaussianResult);
- if(Math.abs(initial.mean-1.1047619047619048)>1e-9)errors.push('Gaussian default mismatch');
- await page.locator('#sigma').fill('3');await page.locator('#sigma').dispatchEvent('input');
- const changed=await page.evaluate(()=>window.gaussianResult);
- if(!(changed.variance>initial.variance))errors.push('Gaussian variance response failed');
- await page.locator('#sigma').fill('0.2');await page.locator('#sigma').dispatchEvent('input');
- const narrow=await page.evaluate(()=>({result:window.gaussianResult,paths:[...document.querySelectorAll('#gaussPlot path')].map(p=>{const b=p.getBBox();return {y:b.y,bottom:b.y+b.height};})}));
- if(narrow.paths.some(p=>p.y<0||p.bottom>500))errors.push('Narrow Gaussian curve clipped');
- await page.screenshot({path:path.join(out,'gaussian-narrow.png')});
- await page.locator('#gaussReset').click();
- await page.keyboard.press('1');await page.keyboard.press('4');await page.waitForTimeout(650);
- await page.locator('[data-event="2"]').click();
- if(!(await page.locator('#eventText').innerText()).includes('75'))errors.push('Timeline interaction failed');
- await page.keyboard.press('2');await page.keyboard.press('2');await page.waitForTimeout(650);
- const first=await page.locator('.slide.active [data-a].on').count();
- for(let k=0;k<4;k++)await page.keyboard.press('j');
- const last=await page.locator('.slide.active [data-a].on').count();
- if(first!==1||last!==5)errors.push('Animation stages failed');
- await page.screenshot({path:path.join(out,'animation-final.png')});
- await page.keyboard.press('n');
- if(!(await page.locator('#notes').isVisible()))errors.push('Notes failed');
- const report={slides:count,errors,layout:layout.filter(p=>p.problems.length),gaussian:{initial,changed,narrow},animation:{first,last},generated:new Date().toISOString()};
- fs.writeFileSync(path.resolve(__dirname,'validation.json'),JSON.stringify(report,null,2));
- await browser.close();console.log(JSON.stringify(report,null,2));
- if(errors.length||report.layout.length)process.exitCode=1;
+ await page.evaluate(()=>window.deck.go(3));await page.evaluate(()=>window.deck.setStep(3));
+ const initial=await page.evaluate(()=>window.kalmanResult);
+ if(Math.abs(initial.mean-1.6)>1e-10||Math.abs(initial.variance-.8)>1e-10)errors.push('Kalman numeric example failed');
+ await page.locator('#noise').fill('9');await page.locator('#noise').dispatchEvent('input');
+ const noisy=await page.evaluate(()=>window.kalmanResult);
+ if(!(noisy.gain<initial.gain&&noisy.variance>initial.variance))errors.push('Noise response failed');
+ if(!(await page.locator('.slide.active .caption').innerText()).includes(noisy.variance.toFixed(2)))errors.push('Caption not synchronized with formula');
+ await page.locator('#noise').fill('0.25');await page.locator('#noise').dispatchEvent('input');
+ const narrow=await page.locator('.slide.active svg').evaluate(svg=>[...svg.querySelectorAll('path')].every(p=>{const b=p.getBBox();return b.y>=0&&b.y+b.height<=530;}));
+ if(!narrow)errors.push('Kalman narrow curve clips');
+ await page.locator('#noise').fill('1');await page.locator('#noise').dispatchEvent('input');
+ await page.screenshot({path:path.join(out,'kalman-detail.png')});
+ await page.evaluate(()=>document.activeElement.blur());
+ await page.keyboard.press('Home');await page.evaluate(()=>window.deck.pause());await page.keyboard.press('j');
+ if((await page.evaluate(()=>window.deck.getState())).step!==1)errors.push('J key failed');
+ await page.keyboard.press('k');if((await page.evaluate(()=>window.deck.getState())).step!==0)errors.push('K key failed');
+ await page.keyboard.press('p');await page.waitForTimeout(400);
+ if(!(await page.evaluate(()=>window.deck.getState())).playing)errors.push('Playback failed');
+ await page.keyboard.press('p');let before=await page.evaluate(()=>window.deck.getState().elapsed);await page.waitForTimeout(200);
+ if(Math.abs((await page.evaluate(()=>window.deck.getState().elapsed))-before)>.02)errors.push('Pause failed');
+ await page.keyboard.press('n');if(!await page.locator('#notes').isVisible())errors.push('Notes failed');await page.keyboard.press('Escape');
+ await page.keyboard.press('g');await page.locator('#nav button[data-page="8"]').click();
+ if((await page.evaluate(()=>window.deck.getState())).page!==9)errors.push('Menu failed');
+ await page.keyboard.press('End');if((await page.evaluate(()=>window.deck.getState())).page!==count)errors.push('End failed');
+ await page.keyboard.press('Home');await page.keyboard.press('1');await page.keyboard.press('4');await page.waitForTimeout(600);
+ if((await page.evaluate(()=>window.deck.getState())).page!==14)errors.push('Numeric navigation failed');
+ const report={slides:count,stagesChecked:count*4,errors,layout,animation,kalman:{initial,noisy,narrow},generated:new Date().toISOString()};
+ fs.writeFileSync(path.join(__dirname,'validation.json'),JSON.stringify(report,null,2));
+ await browser.close();console.log(JSON.stringify(report,null,2));if(errors.length||layout.length)process.exitCode=1;
 })().catch(e=>{console.error(e);process.exitCode=1});
