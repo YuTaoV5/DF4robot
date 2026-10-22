@@ -1,6 +1,6 @@
 """Beginner talk: follow sensor data into a robot's control loop."""
 from pathlib import Path
-import html,json
+import html,json,base64,mimetypes
 
 ROOT=Path(__file__).resolve().parent
 D=ROOT/'deck'
@@ -140,21 +140,34 @@ add('把整条通路记住','每到一个接口，问清楚四件事','什么形
  ('行动','当前身体状态 + 最新可用感知，按控制节拍变成动作。')],
  '本讲18页。三个案例分别是本地高台仿真、Extreme Parkour、两类高飞团队飞行方法，频率和表示均不可跨案例混用。原技术综述与70页版本仍可从Git历史读取；研究文档与论文索引保留。评价融合要回到任务完成与失效原因，但本次科普不再用大量实验表和审阅流程打断数据主线。')
 
+from navigation_slides import extend_slides
+S=extend_slides(S,SOURCES)
+
 def build():
- assert len(S)==18
+ assert len(S)==26
  css=(D/'beginner.css').read_text(encoding='utf-8')
  js=(D/'beginner.js').read_text(encoding='utf-8')
+ js=js.replace('const slides=[', (D/'navigation.js').read_text(encoding='utf-8')+'\nconst slides=[',1)
  sections=[]
+ media={}
  for s in S:
-  i=s['page'];sections.append(f'<section class="slide" data-sec="{s["sec"]}" data-title="{s["title"]}"><div class="kicker"><b>{i:02}</b>{s["sec"]} · <a href="{s["source"][1]}" target="_blank" rel="noopener">{s["source"][0]}</a></div><h1>{s["title"]}</h1><div class="sub">{s["sub"]}</div><div class="viz"><svg class="sv" viewBox="0 0 1600 530" role="img" aria-label="{s["title"]}的分步动画"></svg></div><div class="steps">'+''.join(f'<button class="step" data-step="{j}"><span>{j+1}</span>{st["label"]}</button>' for j,st in enumerate(s['steps']))+'</div><div class="caption"></div><div class="mathhint"></div></section>')
+  if s.get('figure'):
+   path=D/'media'/'navigation'/s['figure']
+   media[s['kind']]='data:'+mimetypes.guess_type(path.name)[0]+';base64,'+base64.b64encode(path.read_bytes()).decode('ascii')
+  links=' · '.join(f'<a href="{html.escape(url,quote=True)}" target="_blank" rel="noopener">{html.escape(label)}</a>' for label,url in s['links'])
+  i=s['page'];sections.append(f'<section class="slide" data-sec="{s["sec"]}" data-title="{s["title"]}"><div class="kicker"><b>{i:02}</b>{s["sec"]}<span class="source-links">{links}</span></div><h1>{s["title"]}</h1><div class="sub">{s["sub"]}</div><div class="viz"><svg class="sv" viewBox="0 0 1600 530" role="img" aria-label="{s["title"]}的分步动画"></svg></div><div class="steps">'+''.join(f'<button class="step" data-step="{j}"><span>{j+1}</span>{st["label"]}</button>' for j,st in enumerate(s['steps']))+'</div><div class="caption"></div><div class="mathhint"></div></section>')
  result='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据怎样变成动作 · 数据融合入门</title><style>'+css+'</style></head><body><div id="stage"><svg width="0" height="0" style="position:absolute"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10" fill="#8E8E93"/></marker></defs></svg>'+''.join(sections)+'<div id="toolbar"><button id="prev">←</button><button id="menu">目录</button><span id="counter"></span><button id="next">→</button><i></i><button id="backstep">K 上一步</button><button id="play">暂停</button><button id="forwardstep">J 下一步</button><button id="replay">重播</button><button id="notesbtn">N 讲稿</button></div><div id="nav"></div><aside id="notes"></aside></div><script>const DATA='+json.dumps(S,ensure_ascii=False)+';\n'+js+'</script></body></html>'
+ result=result.replace('const DATA=', 'const MEDIA='+json.dumps(media)+';\nconst DATA=',1)
+ result=result.replace('<aside id="notes"></aside>', '<aside id="notes"></aside><div id="figure-modal" role="dialog" aria-modal="true" aria-label="论文原图" hidden><button id="figure-close">关闭 · Esc</button><p id="figure-title"></p><img id="figure-full" alt="论文原图"><p class="figure-credit">原图版权归原作者；来源链接见本页页眉</p></div>')
  (D/'deck.html').write_text(result,encoding='utf-8')
  (D/'slides.json').write_text(json.dumps(S,ensure_ascii=False,indent=2),encoding='utf-8')
- md=['# 数据怎样变成动作：18页科普讲稿\n','按P播放/暂停，J/K分步，N讲稿。\n']
+ md=[f'# 数据怎样变成动作：{len(S)}页科普讲稿\n','按P播放/暂停，J/K分步，N讲稿；点击论文配图可放大。\n']
  for s in S:
   md.append(f'## {s["page"]:02} · {s["title"]}\n\n{s["sub"]}\n')
   md.extend(f'{j+1}. **{st["label"]}**：{st["caption"]}' for j,st in enumerate(s['steps']))
   md.append(f'\n讲解补充：{s["note"]}\n\n来源：[{s["source"][0]}]({s["source"][1]})\n')
+  md.append('相关链接：'+' · '.join(f'[{label}]({url})' for label,url in s['links'])+'\n')
+  if s.get('figure'):md.append(f'配图：{s["figure_label"]}；原图版权归原作者。\n')
  (D/'讲稿.md').write_text('\n'.join(md),encoding='utf-8')
  print(f'Built {len(S)} beginner slides, {len(result)} characters')
 

@@ -1,6 +1,49 @@
 {
-  "slides": 18,
-  "stagesChecked": 72,
+  "slides": 26,
+  "stagesChecked": 104,
+  "offline": true,
+  "figures": [
+    {
+      "page": 14,
+      "loaded": true,
+      "links": [
+        "https://extreme-parkour.github.io/resources/parkour.pdf",
+        "https://extreme-parkour.github.io/",
+        "https://github.com/chengxuxin/extreme-parkour"
+      ]
+    },
+    {
+      "page": 18,
+      "loaded": true,
+      "links": [
+        "https://arxiv.org/abs/2606.19555",
+        "https://wuyi2121.github.io/SCAN-Planner/",
+        "https://github.com/wuyi2121/SCAN-Planner"
+      ]
+    },
+    {
+      "page": 20,
+      "loaded": true,
+      "links": [
+        "https://arxiv.org/abs/2610.14634",
+        "https://github.com/VitaDynamics/vbot-lab"
+      ]
+    },
+    {
+      "page": 23,
+      "loaded": true,
+      "links": [
+        "https://arxiv.org/abs/2503.00496"
+      ]
+    },
+    {
+      "page": 24,
+      "loaded": true,
+      "links": [
+        "https://arxiv.org/abs/2602.08653v2"
+      ]
+    }
+  ],
   "errors": [],
   "layout": [],
   "animation": [
@@ -183,6 +226,86 @@
         true,
         true
       ]
+    },
+    {
+      "page": 19,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 20,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 21,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 22,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 23,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 24,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 25,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 26,
+      "withinStageMotion": true,
+      "movingStages": [
+        true,
+        true,
+        true,
+        true
+      ]
     }
   ],
   "kalman": {
@@ -198,5 +321,5 @@
     },
     "narrow": true
   },
-  "generated": "2026-10-18T23:07:13.745Z"
+  "generated": "2026-10-22T17:07:53.236Z"
 }

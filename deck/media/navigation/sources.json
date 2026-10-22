@@ -1,0 +1,42 @@
+[
+  {
+    "file": "scan.jpg",
+    "url": "https://raw.githubusercontent.com/wuyi2121/SCAN-Planner/348e8a590a50a5a6bbab8d8c6dcfd171f009be26/assets/images/abstract_real.jpg",
+    "page": "https://github.com/wuyi2121/SCAN-Planner",
+    "label": "SCAN-Planner 官方项目封面",
+    "sha256": "cf99eced2e77c7b0840b278a5a2055cbd04512eeb98d102883b9d6c2c48dc6a9",
+    "usage": "教学介绍中的署名原图引用；原图版权归原作者，未改绘。"
+  },
+  {
+    "file": "vbot.png",
+    "url": "https://arxiv.org/html/2610.14634v1/figure1.png",
+    "page": "https://arxiv.org/html/2610.14634v1",
+    "label": "VbotNav-0 论文 Figure 1",
+    "sha256": "4923c53467fbfd355e92588216e284426b713433606a87335f00f000fecccacc",
+    "usage": "教学介绍中的署名原图引用；原图版权归原作者，未改绘。"
+  },
+  {
+    "file": "dronepc.jpg",
+    "url": "https://arxiv.org/html/2503.00496v1/figures/indoor.jpg",
+    "page": "https://arxiv.org/html/2503.00496v1",
+    "label": "Flying on Point Clouds 论文实机实验图",
+    "sha256": "2f4b30eee4cb2db87fdfb3b89c49fd24fe91cc92a42291ceb1a1b9b869c8a23e",
+    "usage": "教学介绍中的署名原图引用；原图版权归原作者，未改绘。"
+  },
+  {
+    "file": "dronedepth.png",
+    "url": "https://arxiv.org/html/2602.08653v2/outdoor.png",
+    "page": "https://arxiv.org/html/2602.08653v2",
+    "label": "Safety-Shielded RL 论文室外实验图",
+    "sha256": "911c29ad9531496e707d3e3acba835241b2b689f78ff8501511a90c56cfce811",
+    "usage": "教学介绍中的署名原图引用；原图版权归原作者，未改绘。"
+  },
+  {
+    "file": "parkour.jpg",
+    "url": "https://extreme-parkour.github.io/static/live/parkour-poster.jpg",
+    "page": "https://extreme-parkour.github.io/",
+    "label": "Extreme Parkour 官方演示封面",
+    "sha256": "7249db6d7a68b2b9438fa625dcf0a159e245e138e8e872bef78b655556059cba",
+    "usage": "教学介绍中的署名原图引用；原图版权归原作者，未改绘。"
+  }
+]

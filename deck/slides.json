@@ -27,6 +27,12 @@
     "source": [
       "教学示意",
       "../research/科普版数据口径.md"
+    ],
+    "links": [
+      [
+        "教学示意",
+        "../research/科普版数据口径.md"
+      ]
     ]
   },
   {
@@ -57,6 +63,12 @@
     "source": [
       "教学示意",
       "../research/科普版数据口径.md"
+    ],
+    "links": [
+      [
+        "教学示意",
+        "../research/科普版数据口径.md"
+      ]
     ]
   },
   {
@@ -87,6 +99,12 @@
     "source": [
       "Kalman · 预测与校正",
       "https://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/WELCH/kalman.html"
+    ],
+    "links": [
+      [
+        "Kalman · 预测与校正",
+        "https://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/WELCH/kalman.html"
+      ]
     ]
   },
   {
@@ -117,6 +135,12 @@
     "source": [
       "Kalman · 预测与校正",
       "https://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/WELCH/kalman.html"
+    ],
+    "links": [
+      [
+        "Kalman · 预测与校正",
+        "https://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/WELCH/kalman.html"
+      ]
     ]
   },
   {
@@ -147,6 +171,12 @@
     "source": [
       "教学示意",
       "../research/科普版数据口径.md"
+    ],
+    "links": [
+      [
+        "教学示意",
+        "../research/科普版数据口径.md"
+      ]
     ]
   },
   {
@@ -177,6 +207,12 @@
     "source": [
       "教学示意",
       "../research/科普版数据口径.md"
+    ],
+    "links": [
+      [
+        "教学示意",
+        "../research/科普版数据口径.md"
+      ]
     ]
   },
   {
@@ -207,6 +243,16 @@
     "source": [
       "FAST-LIO2 · 机制概括",
       "https://arxiv.org/abs/2107.06829"
+    ],
+    "links": [
+      [
+        "FAST-LIO2论文",
+        "https://arxiv.org/abs/2107.06829"
+      ],
+      [
+        "FAST-LIO代码",
+        "https://github.com/hku-mars/FAST_LIO"
+      ]
     ]
   },
   {
@@ -237,6 +283,12 @@
     "source": [
       "教学示意",
       "../research/科普版数据口径.md"
+    ],
+    "links": [
+      [
+        "教学示意",
+        "../research/科普版数据口径.md"
+      ]
     ]
   },
   {
@@ -267,6 +319,12 @@
     "source": [
       "Rob2Nav 仿真配置",
       "../research/任务数据流核查.md"
+    ],
+    "links": [
+      [
+        "Rob2Nav 仿真配置",
+        "../research/任务数据流核查.md"
+      ]
     ]
   },
   {
@@ -297,6 +355,12 @@
     "source": [
       "Rob2Nav 仿真配置",
       "../research/任务数据流核查.md"
+    ],
+    "links": [
+      [
+        "Rob2Nav 仿真配置",
+        "../research/任务数据流核查.md"
+      ]
     ]
   },
   {
@@ -327,6 +391,12 @@
     "source": [
       "Rob2Nav 仿真配置",
       "../research/任务数据流核查.md"
+    ],
+    "links": [
+      [
+        "Rob2Nav 仿真配置",
+        "../research/任务数据流核查.md"
+      ]
     ]
   },
   {
@@ -357,6 +427,12 @@
     "source": [
       "Rob2Nav 仿真配置",
       "../research/任务数据流核查.md"
+    ],
+    "links": [
+      [
+        "Rob2Nav 仿真配置",
+        "../research/任务数据流核查.md"
+      ]
     ]
   },
   {
@@ -387,6 +463,12 @@
     "source": [
       "Rob2Nav 仿真配置",
       "../research/任务数据流核查.md"
+    ],
+    "links": [
+      [
+        "Rob2Nav 仿真配置",
+        "../research/任务数据流核查.md"
+      ]
     ]
   },
   {
@@ -417,7 +499,23 @@
     "source": [
       "Extreme Parkour · 论文设置",
       "https://extreme-parkour.github.io/resources/parkour.pdf"
-    ]
+    ],
+    "links": [
+      [
+        "论文",
+        "https://extreme-parkour.github.io/resources/parkour.pdf"
+      ],
+      [
+        "项目",
+        "https://extreme-parkour.github.io/"
+      ],
+      [
+        "代码",
+        "https://github.com/chengxuxin/extreme-parkour"
+      ]
+    ],
+    "figure": "parkour.jpg",
+    "figure_label": "Extreme Parkour · 官方演示封面"
   },
   {
     "page": 15,
@@ -447,10 +545,296 @@
     "source": [
       "教学示意",
       "../research/科普版数据口径.md"
+    ],
+    "links": [
+      [
+        "教学示意",
+        "../research/科普版数据口径.md"
+      ]
     ]
   },
   {
+    "sec": "从感知走向导航",
+    "title": "会迈腿以后，还要决定往哪里走",
+    "sub": "导航的四个接口：我在哪 → 去哪里 → 怎么绕 → 怎样执行。",
+    "kind": "navcontract",
+    "steps": [
+      {
+        "label": "定位",
+        "caption": "把点云放进稳定的坐标系，知道机器人当前在哪里。"
+      },
+      {
+        "label": "路线",
+        "caption": "任务层给目标点或参考路径；一条路线可以跨多个局部地图。"
+      },
+      {
+        "label": "轨迹",
+        "caption": "局部规划结合机身尺寸和障碍，生成下一段可执行运动。"
+      },
+      {
+        "label": "执行",
+        "caption": "跟踪器产生速度指令，底层运动控制器负责关节与平衡。"
+      }
+    ],
+    "note": "接续前面的运动策略：运动能力不等于目标导航。后面用LIO解释定位接口、SCAN解释几何规划、VbotNav解释云边任务分工。四个模块可以替换，但坐标、时间戳、输出类型和失效行为必须保持契约。",
+    "source": [
+      "资源口径与推算",
+      "../research/导航章节设计与来源.md"
+    ],
     "page": 16,
+    "links": [
+      [
+        "资源口径与推算",
+        "../research/导航章节设计与来源.md"
+      ]
+    ]
+  },
+  {
+    "sec": "从感知走向导航",
+    "title": "先算清“我在哪”，点云才能对齐",
+    "sub": "LiDAR-Inertial Odometry：雷达—惯性里程计，为SCAN提供可靠位姿。",
+    "kind": "liochain",
+    "steps": [
+      {
+        "label": "预测",
+        "caption": "IMU先预测姿态、速度和位置，填补两帧雷达之间的运动。"
+      },
+      {
+        "label": "去畸变",
+        "caption": "用逐点时间和运动轨迹，把同一扫描中的点对齐。"
+      },
+      {
+        "label": "校正",
+        "caption": "将点云与局部地图配准，用几何残差修正状态和IMU偏置。"
+      },
+      {
+        "label": "交给SCAN",
+        "caption": "输出带时间戳的位姿与点云；SCAN据此建立局部障碍地图。"
+      }
+    ],
+    "note": "SCAN关联定位项目是Elevator-LIO，源于FAST-LIO2路线。定位内部地图用于配准，SCAN占据地图用于碰撞判断，两者目的不同。可靠位姿是必要接口，但并非只能使用LIO；其他定位系统也可替换。你此前遇到的IMU覆盖不足应先解决，不能通过伪造时间戳或扩大队列掩盖。本文未执行真机修复。",
+    "source": [
+      "FAST-LIO2 · 论文",
+      "https://arxiv.org/abs/2107.06829"
+    ],
+    "page": 17,
+    "links": [
+      [
+        "FAST-LIO2论文",
+        "https://arxiv.org/abs/2107.06829"
+      ],
+      [
+        "Elevator-LIO",
+        "https://github.com/xiaofan4122/Elevator-LIO"
+      ]
+    ]
+  },
+  {
+    "sec": "从感知走向导航",
+    "title": "SCAN：把目标变成绕开障碍的轨迹",
+    "sub": "点云 + 位姿 + 目标/路径 → 局部地图 → B-spline → 速度指令。",
+    "kind": "scanflow",
+    "steps": [
+      {
+        "label": "输入",
+        "caption": "PointCloud2描述障碍；Odometry描述机身和传感器位姿。"
+      },
+      {
+        "label": "规划",
+        "caption": "双圆柱考虑机身朝向，投影A*提供绕障引导，B-spline优化轨迹。"
+      },
+      {
+        "label": "输出",
+        "caption": "发布 /planning/bspline；闭环跟踪器再输出 cmd_vel。"
+      },
+      {
+        "label": "真机接入",
+        "caption": "Go2还需速度门与SDK执行层；SCAN本身不生成关节步态。"
+      }
+    ],
+    "note": "检查上游提交348e8a5。主分支Noetic；navi_mode=1目标点、2关键点、3参考路径。模式3订阅/initial_path（nav_msgs/Path），会给路径z加body_height，且不自动按frame_id做坐标转换。世界点云不能再按传感器点重复变换。论文边界脱困与当前公开主分支实现不能直接等同。",
+    "source": [
+      "SCAN-Planner · 论文",
+      "https://arxiv.org/abs/2606.19555"
+    ],
+    "page": 18,
+    "links": [
+      [
+        "论文",
+        "https://arxiv.org/abs/2606.19555"
+      ],
+      [
+        "项目",
+        "https://wuyi2121.github.io/SCAN-Planner/"
+      ],
+      [
+        "代码",
+        "https://github.com/wuyi2121/SCAN-Planner"
+      ]
+    ],
+    "figure": "scan.jpg",
+    "figure_label": "SCAN-Planner · 官方实机封面"
+  },
+  {
+    "sec": "从感知走向导航",
+    "title": "SCAN主要吃几何计算与地图内存",
+    "sub": "论文实机：Jetson Orin NX；这不是最低芯片要求，也不是纯GPU任务。",
+    "kind": "scanbudget",
+    "steps": [
+      {
+        "label": "计算位置",
+        "caption": "LIO、点云融合、A*和优化需要机载计算；主规划路径主要是CPU工作。"
+      },
+      {
+        "label": "地图规模",
+        "caption": "默认10×10×5米、5厘米体素，对应400万个体素。"
+      },
+      {
+        "label": "内存预算",
+        "caption": "七个体素数组约76 MB；整套进程还要加LIO、点云、搜索和ROS。"
+      },
+      {
+        "label": "测量验收",
+        "caption": "实测延迟与峰值RAM；5厘米改2.5厘米，同体积体素内存约增8倍。"
+      }
+    ],
+    "note": "论文实机所有模块运行于Orin NX，仿真CPU为i9-14900K，不能混写。76MB来自源码常见ABI：8+1+4+2+2+1+1=19B/体素，乘4百万；仅七个数组，不含A*、点云、LIO地图和RViz，不是整机RAM最低值。GPU仿真渲染选项不等于规划器要求CUDA。原文没有给通用最低RAM/TOPS/传感器带宽；验收需记录全链路p95/p99延迟、内存峰值与温控。",
+    "source": [
+      "SCAN-Planner · 论文",
+      "https://arxiv.org/abs/2606.19555"
+    ],
+    "page": 19,
+    "links": [
+      [
+        "论文实机配置",
+        "https://arxiv.org/html/2606.19555v1"
+      ],
+      [
+        "代码与资源推算",
+        "../research/导航章节设计与来源.md"
+      ]
+    ]
+  },
+  {
+    "sec": "从感知走向导航",
+    "title": "VbotNav：云端想方向，机载持续避障",
+    "sub": "云端产生子目标；机载用最新RGB与LiDAR，持续重算局部轨迹。",
+    "kind": "vbotflow",
+    "steps": [
+      {
+        "label": "云端输入",
+        "caption": "图像历史 + 导航指令 + 参考路线，交给4B云端策略。"
+      },
+      {
+        "label": "云端输出",
+        "caption": "输出子目标指导；不是给机器人下载新网络权重。"
+      },
+      {
+        "label": "机载输出",
+        "caption": "RGB与LiDAR融合后生成10点轨迹，再交给独立运动控制器。"
+      },
+      {
+        "label": "异步协作",
+        "caption": "云端结果未到时，机载沿用有效指导；过期与断连由监督层处理。"
+      }
+    ],
+    "note": "论文标称2Hz云端、10Hz机载、50Hz运动控制，并非端到端延迟实测。每个轨迹点为(x,y,sinψ,cosψ)。室内依赖提前规划的参考路线，不能当成开箱即用的未知环境探索。公开检索找到VitaDynamics/vbot-lab开发工具和vbot_ros2_msgs接口，尚未找到VbotNav完整模型代码/权重；团队工具仓库不是论文实现。",
+    "source": [
+      "VbotNav-0 · 论文",
+      "https://arxiv.org/abs/2610.14634"
+    ],
+    "page": 20,
+    "links": [
+      [
+        "论文",
+        "https://arxiv.org/abs/2610.14634"
+      ],
+      [
+        "团队工具 · 非模型代码",
+        "https://github.com/VitaDynamics/vbot-lab"
+      ]
+    ],
+    "figure": "vbot.png",
+    "figure_label": "VbotNav-0 · 论文 Figure 1"
+  },
+  {
+    "sec": "从感知走向导航",
+    "title": "VbotNav的算力，要按云端与机载分账",
+    "sub": "已知模型结构，不等于已知最低芯片、显存与上行网络规格。",
+    "kind": "vbotbudget",
+    "steps": [
+      {
+        "label": "云端权重",
+        "caption": "4B模型若用FP16/BF16，仅权重约8 GB；运行时需求更高。"
+      },
+      {
+        "label": "机载计算",
+        "caption": "视觉编码 + LiDAR BEV + 轨迹网络，适合评估GPU推理与加速。"
+      },
+      {
+        "label": "时限预算",
+        "caption": "标称10Hz机载循环对应100ms周期；须测完整链路，不能只测网络前向。"
+      },
+      {
+        "label": "尚未披露",
+        "caption": "完整芯片、峰值RAM/显存、网络码率未明确；不能据此承诺某板卡可跑。"
+      }
+    ],
+    "note": "8GB为4×10^9参数×2字节的十进制算术下界，不含视觉分支额外开销、KV缓存、激活、框架或并发；不是部署容量建议。机载有DINOv3、DA2-Small、LiDAR BEV融合和flow-matching轨迹网络；没有完整权重和部署配置，不能给可靠TOPS、FPS或内存最低值。要记录输入大小、精度、推理引擎、p95/p99时延、功耗和网络条件。",
+    "source": [
+      "VbotNav-0 · 论文",
+      "https://arxiv.org/abs/2610.14634"
+    ],
+    "page": 21,
+    "links": [
+      [
+        "论文",
+        "https://arxiv.org/html/2610.14634v1"
+      ],
+      [
+        "估算口径",
+        "../research/导航章节设计与来源.md"
+      ]
+    ]
+  },
+  {
+    "sec": "从感知走向导航",
+    "title": "带宽先看：跨网络的是图像，还是目标？",
+    "sub": "下面是可重算的教学载荷，不是任何论文的实测码率。",
+    "kind": "navbandwidth",
+    "steps": [
+      {
+        "label": "原始相机",
+        "caption": "640×480、RGB8、10Hz：约73.7 Mb/s；还没计算协议开销。"
+      },
+      {
+        "label": "深度与点云",
+        "caption": "同尺寸16位深度约49.2 Mb/s；示例点云约25.6 Mb/s。"
+      },
+      {
+        "label": "压缩上传",
+        "caption": "假设每张JPEG 100 kB、每秒2张，约1.6 Mb/s；实际取决于画面与编码。"
+      },
+      {
+        "label": "小量指导",
+        "caption": "10点×4个float32×10Hz仅12.8 kb/s；云端频率不等于传感器上传频率。"
+      }
+    ],
+    "note": "十进制单位：RGB=640×480×3×10×8；深度=640×480×2×10×8；点云假设2万点/包、point_step=16B、10Hz，得到25.6Mb/s，不能当MID360规格。JPEG示例100kB×2×8=1.6Mb/s；历史多帧、多相机或重复上传会增加。轨迹载荷10×4×4×10×8=12800b/s；不是Vbot实测传输协议。公网需测延迟、抖动、丢包和重连；原始点云留机载可减轻网络负担。",
+    "source": [
+      "资源口径与推算",
+      "../research/导航章节设计与来源.md"
+    ],
+    "page": 22,
+    "links": [
+      [
+        "资源口径与推算",
+        "../research/导航章节设计与来源.md"
+      ]
+    ]
+  },
+  {
+    "page": 23,
     "sec": "高飞团队：点云导航",
     "title": "点云压成“每个方向离障碍多远”",
     "sub": "Flying on Point Clouds：局部感知 → 状态融合 → 推力与角速度。",
@@ -473,14 +857,22 @@
         "caption": "每20毫秒给出推力与机体角速度，由飞控执行。"
       }
     ],
-    "note": "按Flying on Point Clouds v1 III-A与IV概括。3200是论文分区实例数，不将其写成原始点数或最终全部网络输入维数。通过局部状态估计对齐历史，避免显式占据栅格规划。训练仿真提供几何和交互反馈，在线不等于无状态估计或无记忆；飞行方向距离不能直接替代四足支撑高度。",
+    "note": "按Flying on Point Clouds v1 III-A与IV概括。3200是论文分区实例数，不将其写成原始点数或最终全部网络输入维数。通过局部状态估计对齐历史，避免显式占据栅格规划。训练仿真提供几何和交互反馈，在线不等于无状态估计或无记忆；飞行方向距离不能直接替代四足支撑高度。 论文机载使用Jetson Orin NX，估计与GPU推理在机载执行；没有给统一最低RAM。未确认2025这篇论文的独立代码库，不链接2018/2019同名pointcloudTraj。",
     "source": [
       "Flying on Point Clouds · v1",
       "https://arxiv.org/html/2503.00496v1"
-    ]
+    ],
+    "links": [
+      [
+        "论文 · arXiv:2503.00496",
+        "https://arxiv.org/abs/2503.00496"
+      ]
+    ],
+    "figure": "dronepc.jpg",
+    "figure_label": "Flying on Point Clouds · 论文实机图"
   },
   {
-    "page": 17,
+    "page": 24,
     "sec": "高飞团队：深度导航",
     "title": "一张深度图，变成下一刻的飞行指令",
     "sub": "Safety-Shielded RL：CNN看空间，GRU记历史，安全层修正动作。",
@@ -503,14 +895,58 @@
         "caption": "实时深度重建局部点云，HOCBF/QP修正后交给飞控。"
       }
     ],
-    "note": "按Safety-Shielded RL v2 III-B/C/D概括。100Hz是论文策略/控制执行频率，不据此推断D435i每秒有100张独立新深度图；原文所读部分没有单独明确相机新帧率，本讲标为未单列。训练Dijkstra/ESDF用于奖励，部署安全层用局部深度点云。安全性质受模型和观测条件限制；此处是论文机制讲解，非本地复现。",
+    "note": "按Safety-Shielded RL v2 III-B/C/D概括。100Hz是论文策略/控制执行频率，不据此推断D435i每秒有100张独立新深度图；原文所读部分没有单独明确相机新帧率，本讲标为未单列。训练Dijkstra/ESDF用于奖励，部署安全层用局部深度点云。安全性质受模型和观测条件限制；此处是论文机制讲解，非本地复现。 本次所读版本未明确机载芯片与峰值内存，不能由100Hz倒推出硬件规格；需连同安全QP一起测试。未确认官方独立代码仓库。",
     "source": [
       "Safety-Shielded RL · v2",
       "https://arxiv.org/html/2602.08653v2"
+    ],
+    "links": [
+      [
+        "论文 · arXiv:2602.08653v2",
+        "https://arxiv.org/abs/2602.08653v2"
+      ]
+    ],
+    "figure": "dronedepth.png",
+    "figure_label": "Safety-Shielded RL · 论文室外图"
+  },
+  {
+    "sec": "把方案接回Go2",
+    "title": "让云端决定意图，让机载守住实时闭环",
+    "sub": "工程建议：可靠定位 → 局部避障 → 有保护的执行，最后再接语言导航。",
+    "kind": "navdeploy",
+    "steps": [
+      {
+        "label": "先定位",
+        "caption": "MID360 + IMU → LIO；先验证时序、静止漂移、点云与TF一致性。"
+      },
+      {
+        "label": "再规划",
+        "caption": "SCAN接收点云、位姿和目标，先完成低速、短距离、平地导航。"
+      },
+      {
+        "label": "接执行",
+        "caption": "轨迹跟踪 → 速度门 → Unitree SDK；超时、失定位和急停在机载处理。"
+      },
+      {
+        "label": "最后上云",
+        "caption": "云端下发带时间戳和坐标系的目标；机载检查有效性，再交给SCAN。"
+      }
+    ],
+    "note": "这是借鉴云边分工的工程组合，不是VbotNav原版复现。高飞团队两篇论文直接输出飞行动作；SCAN输出轨迹/速度；VbotNav分层输出子目标/轨迹，各自接口不能直接互换。无需为了云端语义推理把Go2 Noetic链整体改为ROS2。验收应覆盖过期目标、乱序结果、断网、定位掉线和控制权接管。",
+    "source": [
+      "资源口径与推算",
+      "../research/导航章节设计与来源.md"
+    ],
+    "page": 25,
+    "links": [
+      [
+        "资源口径与推算",
+        "../research/导航章节设计与来源.md"
+      ]
     ]
   },
   {
-    "page": 18,
+    "page": 26,
     "sec": "把整条通路记住",
     "title": "每到一个接口，问清楚四件事",
     "sub": "什么形状？多久更新？表示什么？下一步拿它做什么？",
@@ -530,13 +966,19 @@
       },
       {
         "label": "行动",
-        "caption": "当前身体状态 + 最新可用感知，按控制节拍变成动作。"
+        "caption": "闭环动作还要满足时效、算力、内存和带宽预算；接口失效时必须有明确行为。"
       }
     ],
-    "note": "本讲18页。三个案例分别是本地高台仿真、Extreme Parkour、两类高飞团队飞行方法，频率和表示均不可跨案例混用。原技术综述与70页版本仍可从Git历史读取；研究文档与论文索引保留。评价融合要回到任务完成与失效原因，但本次科普不再用大量实验表和审阅流程打断数据主线。",
+    "note": "本讲26页。主线从测量对齐、状态估计、局部表示与动作，延伸到LIO、SCAN和云边导航。论文硬件、代码推算、教学带宽例子分别标记；没有把配置频率当作延迟实测，也没有声称新增真机验证。",
     "source": [
       "教学示意",
       "../research/科普版数据口径.md"
+    ],
+    "links": [
+      [
+        "教学示意",
+        "../research/科普版数据口径.md"
+      ]
     ]
   }
 ]

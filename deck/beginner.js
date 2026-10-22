@@ -19,6 +19,7 @@ function grid(x,y,w=380,h=235,phase=2,age=false){let s='';const cw=w/17,ch=h/11;
 function vector(x,y,n,label,hi=true){let s='';for(let j=0;j<24;j++)s+=R(x+j*12,y,8,30+(j*7%29),hi?'#82B3EA':'#D2D2D7',2);return s+T(x+140,y+100,label,24,M,'middle')+T(x+140,y-20,n,37,hi?B:I,'middle');}
 function pointsLines(k,u){return pipe([['原始测量','图像 / 点 / IMU'],['时空对齐','时间戳 + 运动状态'],['任务表示','地形 / 特征 + 身体'],['控制动作','关节 / 飞行指令']],k,u);}
 function scene(kind,k,u){motion=u;let s='';
+ const navigation=navigationScene(kind,k,u);if(navigation!==null)return navigation;
  if(kind==='overview'){
   s=pointsLines(k,u)+robot(90,445,.65,k===3?u*50:0)+T(430,425,'测量不是动作',35,M)+T(930,425,'每一步都在改写数据的含义',35,B);
  }
@@ -149,6 +150,7 @@ function scene(kind,k,u){motion=u;let s='';
 
 const slides=[...document.querySelectorAll('.slide')];let current=0,step=0,elapsed=0,playing=false,last=0,noise=1;
 function mathHint(kind,k){
+ if(navigationHints[kind])return navigationHints[kind];
  const formulas={
   kalman:[`x预测 = 0 m，P = 4 m²；P表示原估计的误差方差`, `z = 2 m，R = ${noise.toFixed(2)} m²；R表示新测量的误差方差`,
    `K = P ÷ (P + R) = ${(4/(4+noise)).toFixed(2)}；K就是向新测量移动的比例`,
